@@ -1,0 +1,177 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<RV>:
+	viewclass: 'Label'
+	RecycleBoxLayout:
+		default_size: None, dp(56)
+		default_size_hint: 1, None
+		size_hint_y: None
+		height: self.minimum_height
+		orientation: 'vertical'
+
+<Calculator>:
+	canvas.before:
+		Color:
+			rgba: hex('#CCDCDB')
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint_x: .55
+		Label:
+			id: warning
+			canvas.before:
+				Color:
+					rgba: hex('#9FBFBE')
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			size_hint_y: .1
+			color: 0,0,0,1
+			font_size: 20
+		BoxLayout:
+			size_hint_y: .15
+			Button:
+				id: last_operation_label
+				background_normal: ''
+				background_color: hex('#CCDCDB')
+				size_hint_x: .85
+				font_size: 25
+				text_size: self.size
+				halign: 'right'
+				color: 0,0,0,1
+				on_release: root.answer(self.text)
+			Label:
+				id: operator_label
+				color: 0,0,0,1
+				size_hint_x: .15
+				font_size: 25
+				text_size: self.size
+				halign: 'left'				
+		FloatInput:
+			id: expresion_input
+			multiline: False
+			focus: True
+			font_size: 25
+			size_hint_y: .25
+			on_text_validate: root.equal()
+		GridLayout:
+			cols: 4
+			rows: 6
+			Button:
+				id: percent
+				text: '%'
+				on_release: root.percent()
+			Button:
+				id: clear_entry
+				text: 'CE'
+				on_release: root.erase(False)
+			Button:
+				id: clear
+				text: 'C'
+				on_release: root.erase(True)
+			Button:
+				id: delete
+				text: 'Del'
+				on_release: root.erase(False, False)
+			Button:
+				id: mult_inverse
+				text: '1/x'
+				on_release: root.multiplicative_inverse()
+			Button:
+				id: power_of_two
+				text: 'x^2'
+				on_release: root.power_of_two()
+			Button:
+				id: squared
+				text: 'x^(1/2)'
+				on_release: root.squared()
+			Button:
+				id: divide
+				text: '/'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: seven
+				text: '7'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: eight
+				text: '8'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: nine
+				text: '9'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: multiply
+				text: '*'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: four
+				text: '4'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: five
+				text: '5'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: six
+				text: '6'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: minus
+				text: '-'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: one
+				text: '1'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: two
+				text: '2'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: three
+				text: '3'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: add
+				text: '+'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: positive_negative
+				text: '+/-'
+				on_release: root.positive_negative()
+			Button:
+				id: zero
+				text: '0'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: decimal
+				text: '.'
+				on_release: root.ids.expresion_input.insert_text(self.text)
+			Button:
+				id: equal
+				text: '='
+				on_release: root.equal()
+	BoxLayout:
+		size_hint_x: .45
+		orientation: 'vertical'
+		canvas.before:
+			Color:
+				rgba: hex('#B5C6C5')
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		Label:
+			size_hint_y: .1
+			text: 'History'
+			color: 0,0,0,1
+		RV:
+			id: rvs
+		Button:
+			text: 'Delete History'
+			size_hint_y: .1
+			on_release: root.delete_history()
+
