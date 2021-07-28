@@ -1,2 +1,2 @@
 # Calc
-Simple Calculator
+Simple calculator using python and kivy
